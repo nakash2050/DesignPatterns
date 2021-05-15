@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Memento\Memento.csproj" />
+    <ProjectReference Include="..\State\State.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

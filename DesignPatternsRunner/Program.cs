@@ -1,5 +1,6 @@
 ﻿using Memento;
 using System;
+using State;
 
 namespace DesignPatternsRunner
 {
@@ -9,7 +10,8 @@ namespace DesignPatternsRunner
         {
             Console.WriteLine("Hello World!");
 
-            TestMemento();
+            // TestMemento();
+            TestState();
 
             Console.ReadLine();
         }
@@ -41,6 +43,17 @@ namespace DesignPatternsRunner
             // editor.Restore(history.Pop());
 
             System.Console.WriteLine(editor.Content);
+        }
+
+        static void TestState()
+        {
+            var canvas = new Canvas(new SelectionTool());
+            canvas.MouseDown();
+            canvas.MouseUp();
+
+            canvas = new Canvas(new BrushTool());
+            canvas.MouseDown();
+            canvas.MouseUp();
         }
     }
 }
