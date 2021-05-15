@@ -1,6 +1,7 @@
 ﻿using Memento;
 using System;
 using State;
+using Iterator;
 
 namespace DesignPatternsRunner
 {
@@ -11,7 +12,8 @@ namespace DesignPatternsRunner
             Console.WriteLine("Hello World!");
 
             // TestMemento();
-            TestState();
+            // TestState();
+            TestIterator();
 
             Console.ReadLine();
         }
@@ -54,6 +56,34 @@ namespace DesignPatternsRunner
             canvas = new Canvas(new BrushTool());
             canvas.MouseDown();
             canvas.MouseUp();
+        }
+
+        static void TestIterator()
+        {
+            var browserHistory = new BrowserHistory();
+            browserHistory.Push("URL1");
+            browserHistory.Push("URL3");
+            browserHistory.Push("URL2");
+
+            var iterator = browserHistory.CreateIterator();
+
+            while(iterator.HasNext())
+            {
+                System.Console.WriteLine(iterator.Current());
+                iterator.Next();
+            }
+            
+            browserHistory.Pop();
+            browserHistory.Pop();
+            browserHistory.Pop();
+
+            iterator = browserHistory.CreateIterator();
+
+            while(iterator.HasNext())
+            {
+                System.Console.WriteLine(iterator.Current());
+                iterator.Next();
+            }
         }
     }
 }
