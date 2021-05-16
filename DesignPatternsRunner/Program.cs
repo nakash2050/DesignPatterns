@@ -3,6 +3,7 @@ using System;
 using State;
 using Iterator;
 using Strategy;
+using TemplateMethod;
 
 namespace DesignPatternsRunner
 {
@@ -15,7 +16,8 @@ namespace DesignPatternsRunner
             // TestMemento();
             // TestState();
             // TestIterator();
-            TestStrategy();
+            // TestStrategy();
+            TestTemplateMethod();
 
             // Console.ReadLine();
         }
@@ -97,6 +99,17 @@ namespace DesignPatternsRunner
             
             // Strategy 2
             imageStorage.Store("FileName1", new PngCompressor(), new HighContrastFilter());
+        }
+
+        static void TestTemplateMethod()
+        {
+            // This will first execute Audit Trail and then call the Transfer Money operations
+            var transferMoney = new TransferMoneyTask();
+            transferMoney.Execute();
+            
+            // This will first execute Audit Trail and then call the Generate Report operations
+            var generateReport = new GenerateReportTask();
+            generateReport.Execute();
         }
     }
 }
