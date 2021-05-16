@@ -2,6 +2,7 @@
 using System;
 using State;
 using Iterator;
+using Strategy;
 
 namespace DesignPatternsRunner
 {
@@ -13,9 +14,10 @@ namespace DesignPatternsRunner
 
             // TestMemento();
             // TestState();
-            TestIterator();
+            // TestIterator();
+            TestStrategy();
 
-            Console.ReadLine();
+            // Console.ReadLine();
         }
 
         static void TestMemento()
@@ -84,6 +86,17 @@ namespace DesignPatternsRunner
                 System.Console.WriteLine(iterator.Current());
                 iterator.Next();
             }
+        }
+
+        static void TestStrategy()
+        {
+            var imageStorage = new ImageStorage();
+
+            // Strategy 1
+            imageStorage.Store("FileName1", new JpegCompressor(), new BlackAndWhiteFilter());
+            
+            // Strategy 2
+            imageStorage.Store("FileName1", new PngCompressor(), new HighContrastFilter());
         }
     }
 }

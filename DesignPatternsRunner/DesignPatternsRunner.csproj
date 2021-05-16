@@ -4,6 +4,7 @@
     <ProjectReference Include="..\Memento\Memento.csproj" />
     <ProjectReference Include="..\State\State.csproj" />
     <ProjectReference Include="..\Iterator\Iterator.csproj" />
+    <ProjectReference Include="..\Strategy\Strategy.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
