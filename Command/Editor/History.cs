@@ -4,14 +4,14 @@ namespace Command.Editor
 {
     public class History
     {
-        private Stack<UndoableCommand> _commands = new();
+        private Stack<IUndoableCommand> _commands = new();
 
-        public void Push(UndoableCommand command)
+        public void Push(IUndoableCommand command)
         {
             _commands.Push(command);
         }
 
-        public UndoableCommand Pop()
+        public IUndoableCommand Pop()
         {
             return _commands.Pop();
         }

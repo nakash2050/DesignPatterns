@@ -1,6 +1,6 @@
 namespace Command.Editor
 {
-    public class BoldCommand : UndoableCommand
+    public class BoldCommand : IUndoableCommand
     {
         private string _prevContent;
         private HtmlDocument _document;
