@@ -8,6 +8,7 @@ using Command;
 using Command.Fx;
 using Command.Editor;
 using Command.Composite;
+using Observer.Push;
 
 namespace DesignPatternsRunner
 {
@@ -24,11 +25,13 @@ namespace DesignPatternsRunner
             // TestTemplateMethod();
             // TestCommand();
             // TestUndoableCommand();
-            TestCompositeCommand();
+            // TestCompositeCommand();
+            // TestObserverPush();
+            TestObserverPull();
 
             // Console.ReadLine();
         }
-
+    
         static void TestMemento()
         {
             var editor = new Editor();
@@ -161,5 +164,23 @@ namespace DesignPatternsRunner
 
             composite.Execute();
         }
+
+        private static void TestObserverPush()
+        {
+            var dataSource = new DataSource();
+            dataSource.AddObserver(new Chart());
+            dataSource.AddObserver(new SpreadSheet());
+            dataSource.AddObserver(new SpreadSheet());
+            dataSource.Value = 4;
+        }  
+
+        private static void TestObserverPull()
+        {
+            var dataSource = new Observer.Pull.DataSource();
+            dataSource.AddObserver(new Observer.Pull.Chart(dataSource));
+            dataSource.AddObserver(new Observer.Pull.SpreadSheet(dataSource));
+            dataSource.AddObserver(new Observer.Pull.SpreadSheet(dataSource));
+            dataSource.Value = 7;
+        }       
     }
 }
