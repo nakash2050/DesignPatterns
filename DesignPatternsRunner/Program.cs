@@ -4,6 +4,10 @@ using State;
 using Iterator;
 using Strategy;
 using TemplateMethod;
+using Command;
+using Command.Fx;
+using Command.Editor;
+using Command.Composite;
 
 namespace DesignPatternsRunner
 {
@@ -17,7 +21,10 @@ namespace DesignPatternsRunner
             // TestState();
             // TestIterator();
             // TestStrategy();
-            TestTemplateMethod();
+            // TestTemplateMethod();
+            // TestCommand();
+            // TestUndoableCommand();
+            TestCompositeCommand();
 
             // Console.ReadLine();
         }
@@ -25,7 +32,7 @@ namespace DesignPatternsRunner
         static void TestMemento()
         {
             var editor = new Editor();
-            var history = new History();
+            var history = new Memento.History();
 
             editor.Content = "This is content 1";
             history.Push(editor.CreateState());
@@ -110,6 +117,49 @@ namespace DesignPatternsRunner
             // This will first execute Audit Trail and then call the Generate Report operations
             var generateReport = new GenerateReportTask();
             generateReport.Execute();
+        }
+
+        static void TestCommand()
+        {
+            var customerService = new CustomerService();
+            var command = new AddCustomerCommand(customerService);
+            var button = new Button(command);
+            button.Click();
+        }
+
+        static void TestUndoableCommand()
+        {
+            var history = new Command.Editor.History();
+            var document = new HtmlDocument();
+            document.Content = "Hello World";
+
+            var boldCommand = new BoldCommand(document, history);
+            boldCommand.Execute();
+
+            System.Console.WriteLine(document.Content);
+
+            document.Content = "This is Command Pattern";
+            boldCommand = new BoldCommand(document, history);
+            boldCommand.Execute();
+
+            System.Console.WriteLine(document.Content);
+
+            var undoCommand = new UndoCommand(history);
+            undoCommand.Execute();
+            
+            System.Console.WriteLine(document.Content);
+
+            undoCommand.Execute();
+            System.Console.WriteLine(document.Content);
+        }
+
+        static void TestCompositeCommand()
+        {
+            var composite = new CompositeCommand();
+            composite.Add(new ResizeCommand());
+            composite.Add(new BlackAndWhiteCommand());
+
+            composite.Execute();
         }
     }
 }
