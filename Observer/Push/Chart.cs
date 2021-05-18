@@ -1,5 +1,6 @@
 namespace Observer.Push
 {
+    // 3. Concrete Observer
     public class Chart : IObserver
     {
         public void Update(int value)
