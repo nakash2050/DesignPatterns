@@ -9,6 +9,7 @@
     <ProjectReference Include="..\Command\Command.csproj" />
     <ProjectReference Include="..\Observer\Observer.csproj" />
     <ProjectReference Include="..\Mediator\Mediator.csproj" />
+    <ProjectReference Include="..\ChainOfResponsibility\ChainOfResponsibility.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

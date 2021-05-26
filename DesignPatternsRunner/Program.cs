@@ -10,6 +10,7 @@ using Command.Editor;
 using Command.Composite;
 using Observer.Push;
 using Mediator;
+using ChainOfResponsibility;
 
 namespace DesignPatternsRunner
 {
@@ -29,7 +30,8 @@ namespace DesignPatternsRunner
             // TestCompositeCommand();
             // TestObserverPush();
             // TestObserverPull();
-            TestMediatorPattern();
+            // TestMediatorPattern();
+            TestChainOfResponsibility();
 
             // Console.ReadLine();
         }
@@ -189,6 +191,16 @@ namespace DesignPatternsRunner
         {
             var dialog = new ArticlesDialogBox();
             dialog.SimulateUserInteraction();
+        }
+
+        private static void TestChainOfResponsibility()
+        {
+            var compressor = new Compressor(null);
+            var logger = new Logger(compressor);
+            var authenticator = new Authenticator(logger);
+
+            var server = new WebServer(authenticator);
+            server.Handle(new HttpRequest("admin", "1234"));
         }
     }
 }
