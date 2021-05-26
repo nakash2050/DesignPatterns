@@ -8,6 +8,7 @@
     <ProjectReference Include="..\TemplateMethod\TemplateMethod.csproj" />
     <ProjectReference Include="..\Command\Command.csproj" />
     <ProjectReference Include="..\Observer\Observer.csproj" />
+    <ProjectReference Include="..\Mediator\Mediator.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

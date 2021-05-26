@@ -9,6 +9,7 @@ using Command.Fx;
 using Command.Editor;
 using Command.Composite;
 using Observer.Push;
+using Mediator;
 
 namespace DesignPatternsRunner
 {
@@ -27,11 +28,12 @@ namespace DesignPatternsRunner
             // TestUndoableCommand();
             // TestCompositeCommand();
             // TestObserverPush();
-            TestObserverPull();
+            // TestObserverPull();
+            TestMediatorPattern();
 
             // Console.ReadLine();
         }
-    
+
         static void TestMemento()
         {
             var editor = new Editor();
@@ -126,7 +128,7 @@ namespace DesignPatternsRunner
         {
             var customerService = new CustomerService();
             var command = new AddCustomerCommand(customerService);
-            var button = new Button(command);
+            var button = new Command.Fx.Button(command);
             button.Click();
         }
 
@@ -181,6 +183,12 @@ namespace DesignPatternsRunner
             dataSource.AddObserver(new Observer.Pull.SpreadSheet(dataSource));
             dataSource.AddObserver(new Observer.Pull.SpreadSheet(dataSource));
             dataSource.Value = 7;
-        }       
+        }
+
+        private static void TestMediatorPattern()
+        {
+            var dialog = new ArticlesDialogBox();
+            dialog.SimulateUserInteraction();
+        }
     }
 }
