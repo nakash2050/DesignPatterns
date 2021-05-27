@@ -11,6 +11,7 @@ using Command.Composite;
 using Observer.Push;
 using Mediator;
 using ChainOfResponsibility;
+using Visitor;
 
 namespace DesignPatternsRunner
 {
@@ -31,7 +32,8 @@ namespace DesignPatternsRunner
             // TestObserverPush();
             // TestObserverPull();
             // TestMediatorPattern();
-            TestChainOfResponsibility();
+            // TestChainOfResponsibilityPattern();
+            TestVisitorPattern();
 
             // Console.ReadLine();
         }
@@ -137,7 +139,7 @@ namespace DesignPatternsRunner
         static void TestUndoableCommand()
         {
             var history = new Command.Editor.History();
-            var document = new HtmlDocument();
+            var document = new Command.Editor.HtmlDocument();
             document.Content = "Hello World";
 
             var boldCommand = new BoldCommand(document, history);
@@ -193,7 +195,7 @@ namespace DesignPatternsRunner
             dialog.SimulateUserInteraction();
         }
 
-        private static void TestChainOfResponsibility()
+        private static void TestChainOfResponsibilityPattern()
         {
             var compressor = new Compressor(null);
             var logger = new Logger(compressor);
@@ -201,6 +203,14 @@ namespace DesignPatternsRunner
 
             var server = new WebServer(authenticator);
             server.Handle(new HttpRequest("admin", "1234"));
+        }
+
+        private static void TestVisitorPattern()
+        {
+            var document = new Visitor.HtmlDocument();
+            document.Add(new HeadingNode());
+            document.Add(new AnchorNode());
+            document.Execute(new HighlightOperation());
         }
     }
 }
